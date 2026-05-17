@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LeadForm from '../components/LeadForm.astro';
+import dealer from '../data/dealer.json';
+import { getCollection } from 'astro:content';
+
+const products = await getCollection('products');
+const modelNames = products.map((product) => product.data.title);
+---
+<Layout
+  title="Contact | Nakaja Bikes Nairobi"
+  description="Contact Nakaja Bikes in Nairobi to visit the Industrial Area showroom, ask about UM motorcycles, or request a callback about financing and availability."
+  canonicalPath="/contact/"
+>
+  <div class="max-w-[1280px] mx-auto px-6 py-12 md:py-24">
+    <p class="font-mono text-xs uppercase tracking-[0.28em] text-primary-container mb-5">Authorized UM Dealer Nairobi</p>
+    <h1 class="text-5xl md:text-7xl font-display font-bold text-white uppercase mb-6 tracking-tighter">Contact Us</h1>
+    <div class="w-24 h-1 bg-primary-container mb-12"></div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div>
+        <p class="text-xl text-secondary font-body mb-12">Ready to upgrade your ride? Visit our showroom or request a callback to speak with our sales team.</p>
+
+        <div class="space-y-8">
+          <section class="card p-6 bg-surface-container border border-metal/20" aria-labelledby="showroom-location-heading">
+            <h2 id="showroom-location-heading" class="text-xl font-display font-bold text-white uppercase mb-4">Showroom Location</h2>
+            <p class="text-secondary font-body">{dealer.location}</p>
+          </section>
+
+          <section class="card p-6 bg-surface-container border border-metal/20" aria-labelledby="contact-info-heading">
+            <h2 id="contact-info-heading" class="text-xl font-display font-bold text-white uppercase mb-4">Contact Info</h2>
+            <p class="text-secondary font-mono mb-2">{dealer.phoneDisplay}</p>
+            <p class="text-secondary font-mono">{dealer.email}</p>
+          </section>
+
+          <section class="card p-6 bg-surface-container border border-metal/20" aria-labelledby="opening-hours-heading">
+            <h2 id="opening-hours-heading" class="text-xl font-display font-bold text-white uppercase mb-4">Opening Hours</h2>
+            <div class="flex justify-between text-secondary font-mono mb-2">
+              <span>Mon - Fri:</span>
+              <span>8:00 AM - 5:00 PM</span>
+            </div>
+            <div class="flex justify-between text-secondary font-mono mb-2">
+              <span>Saturday:</span>
+              <span>8:00 AM - 1:00 PM</span>
+            </div>
+            <div class="flex justify-between text-secondary font-mono">
+              <span>Sunday:</span>
+              <span>Closed</span>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div>
+        <LeadForm models={modelNames} />
+      </div>
+    </div>
+  </div>
+</Layout>

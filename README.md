@@ -1,43 +1,82 @@
-# Astro Starter Kit: Minimal
+# Nakaja Bikes Website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+## Overview
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Nakaja Bikes is a production-ready motorcycle dealership website for an authorized UM Motorbikes dealer in Nairobi, Kenya.
 
-## 🚀 Project Structure
+The site is designed to sell motorcycles, explain financing options, capture leads, and push customers into WhatsApp or Messenger conversations quickly.
 
-Inside of your Astro project, you'll see the following folders and files:
+The website must feel premium, rugged, fast, trustworthy, and built for the Kenyan boda boda market.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Business Goal
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The website must help Nakaja Bikes:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Showcase UM motorcycle models
+- Convert visitors into WhatsApp conversations
+- Capture financing leads
+- Explain Watu Credit and Fortune Credit repayment options
+- Support mobile-first buyers
+- Build trust around the Industrial Area showroom
+- Prepare for Meta WhatsApp and Messenger automation
 
-Any static assets, like images, can be placed in the `public/` directory.
+Primary conversion actions:
 
-## 🧞 Commands
+- Book on WhatsApp
+- Request financing
+- View motorcycles
+- Visit showroom
+- Send Messenger inquiry
+- Request callback
 
-All commands are run from the root of the project, from a terminal:
+## Target Market
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Primary users:
 
-## 👀 Want to learn more?
+- Nairobi boda boda riders
+- Delivery riders
+- Daily-income hustlers
+- Motorcycle entrepreneurs
+- Commuters
+- Riders upgrading from old bikes
+- Buyers comparing deposit and repayment options
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+They care about:
+
+- Daily repayment
+- Deposit amount
+- Cash price
+- Fuel economy
+- Durability
+- Spare parts and support
+- Fast approval
+- Trustworthy dealer
+- Clear WhatsApp response
+
+## Tech Stack
+
+Use:
+
+- Astro static site
+- Tailwind CSS
+- TypeScript
+- Cloudflare Pages
+- Cloudflare Pages Functions
+- Supabase
+- Cloudinary
+- GSAP
+- Three.js
+- Swiper
+- Lenis
+
+Avoid:
+
+- Heavy SSR
+- Unnecessary React
+- Framer Motion unless a React island is already necessary
+- Large client-side JavaScript
+- Supabase Storage for heavy public media
+- Exposing service role keys
+- Fake content
+
+

@@ -1,0 +1,98 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import StickyWhatsAppCTA from '../components/StickyWhatsAppCTA.astro';
+import dealer from '../data/dealer.json';
+import { buildAbsoluteUrl, buildCanonicalPath, defaultOgImagePath } from '../lib/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'Nakaja Bikes is an authorized UM Motorbikes dealer in Nairobi with rugged commuter motorcycles, financing support, and direct WhatsApp booking.',
+  canonicalPath = buildCanonicalPath(Astro.url.pathname),
+  ogImage = defaultOgImagePath,
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const canonicalUrl = buildAbsoluteUrl(canonicalPath);
+const ogImageUrl = buildAbsoluteUrl(ogImage);
+const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" content="#131313" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="1024x1024" href="/favicons/nakaja_favicon.png" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Nakaja Bikes" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content="Nakaja Bikes showroom branding" />
+    <meta property="og:locale" content="en_KE" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <title>{title}</title>
+  </head>
+  <body class="bg-background text-on-background min-h-screen flex flex-col pt-20">
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <footer class="border-t border-metal/20 mt-24 py-12 bg-[#0e0e0e]">
+      <div class="max-w-[1280px] mx-auto px-6 grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr_1fr] gap-8">
+        <div>
+          <a href="/" class="inline-flex items-center gap-3 mb-4" aria-label={`${dealer.dealer} home`}>
+            <img src="/logo_nakaja.png" alt="Nakaja Bikes logo" class="h-12 w-12 object-contain" width="48" height="48" loading="lazy" />
+            <h2 class="text-xl font-display font-bold uppercase">{dealer.dealer}</h2>
+          </a>
+          <p class="text-secondary max-w-sm">Authorized UM Motorbikes dealer in Nairobi. {dealer.slogans.primary}.</p>
+          <p class="text-secondary font-mono text-xs mt-6 max-w-xl">Rates and approval are subject to financing partner terms. Confirm current offer with Nakaja Bikes.</p>
+        </div>
+        <nav aria-label="Footer quick links">
+          <h2 class="font-mono text-sm uppercase text-secondary mb-4">Quick Links</h2>
+          <ul class="space-y-2">
+            <li><a href="/motorcycles" class="hover:text-primary-container transition-colors">Motorcycles</a></li>
+            <li><a href="/financing" class="hover:text-primary-container transition-colors">Financing Plans</a></li>
+            <li><a href="/contact" class="hover:text-primary-container transition-colors">Contact Us</a></li>
+          </ul>
+        </nav>
+        <section aria-labelledby="footer-showroom-heading">
+          <h2 id="footer-showroom-heading" class="font-mono text-sm uppercase text-secondary mb-4">Showroom</h2>
+          <ul class="space-y-2 text-secondary">
+            <li>{dealer.location}</li>
+            <li>{dealer.phoneDisplay}</li>
+            <li>{dealer.email}</li>
+            <li>nakajabikes.co.ke</li>
+          </ul>
+        </section>
+      </div>
+    </footer>
+    <StickyWhatsAppCTA />
+  </body>
+</html>

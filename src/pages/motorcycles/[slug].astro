@@ -1,0 +1,191 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ProductGallery from '../../components/ProductGallery.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import FinanceCards from '../../components/FinanceCards.astro';
+import FinancingCTA from '../../components/FinancingCTA.astro';
+import Viewer3D from '../../components/Viewer3D.astro';
+import SpecGrid from '../../components/SpecGrid.astro';
+import MessengerCTA from '../../components/MessengerCTA.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import dealer from '../../data/dealer.json';
+import { buildWhatsAppUrl } from '../../lib/contact';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map((product) => ({
+    params: { slug: product.data.slug ?? product.id },
+    props: { product, products },
+  }));
+}
+
+interface Props {
+  product: CollectionEntry<'products'>;
+  products: CollectionEntry<'products'>[];
+}
+
+const { product, products } = Astro.props;
+const {
+  title,
+  excerpt,
+  cashPrice,
+  deposit,
+  watuPlan,
+  fortunePlan,
+  engine,
+  power,
+  torque,
+  maxLoad,
+  warranty,
+  gallery = [],
+  whatsappText,
+  heroImage,
+  modelPath,
+} = product.data;
+
+const { Content } = await render(product);
+const whatsappUrl = buildWhatsAppUrl(whatsappText);
+const modelNames = products.map((entry) => entry.data.title);
+const relatedProducts = products
+  .filter((entry) => entry.id !== product.id)
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || (a.data.featuredOrder ?? 99) - (b.data.featuredOrder ?? 99))
+  .slice(0, 3);
+
+const specs = [
+  { label: 'Engine', value: engine },
+  { label: 'Power', value: power },
+  { label: 'Torque', value: torque },
+  { label: 'Max Load', value: maxLoad === 'TBD' ? 'Pending verification' : maxLoad },
+  { label: 'Warranty', value: warranty, emphasis: true },
+  { label: 'Cash Price', value: `KSh ${cashPrice.toLocaleString()}`, emphasis: true },
+];
+---
+<Layout
+  title={`${title} | Nakaja Bikes`}
+  description={`${title} at Nakaja Bikes Nairobi. View listed specs, gallery, cash price, financing options, and direct showroom contact.`}
+  canonicalPath={`/motorcycles/${product.data.slug ?? product.id}/`}
+  ogImage={heroImage?.src}
+>
+  <section class="relative overflow-hidden border-b border-metal/20 bg-[radial-gradient(circle_at_75%_20%,rgba(227,24,55,0.18),transparent_34%),linear-gradient(135deg,#0e0e0e,#201f1f_58%,#131313)]">
+    <div class="max-w-[1280px] mx-auto px-6 py-12 md:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-center">
+        <div>
+          <a href="/motorcycles" class="inline-flex mb-6 font-mono text-xs uppercase tracking-widest text-secondary hover:text-white transition-colors">Back to motorcycles</a>
+          <p class="font-mono text-xs uppercase tracking-[0.28em] text-primary-container mb-4">Authorized UM Dealer Nairobi</p>
+          <h1 class="text-4xl md:text-6xl xl:text-7xl font-display font-bold text-white uppercase tracking-tighter mb-5">{title}</h1>
+          <p class="text-lg md:text-xl text-secondary font-body leading-relaxed mb-8">{excerpt}</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+            <div class="border border-metal/20 bg-black/30 p-4">
+              <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">Cash Price</span>
+              <strong class="block text-primary-container font-display text-2xl">KSh {cashPrice.toLocaleString()}</strong>
+            </div>
+            <div class="border border-metal/20 bg-black/30 p-4">
+              <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">Deposit</span>
+              <strong class="block text-white font-display text-2xl">{deposit > 0 ? `KSh ${deposit.toLocaleString()}` : 'Confirm'}</strong>
+            </div>
+            <div class="border border-metal/20 bg-black/30 p-4">
+              <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">Engine</span>
+              <strong class="block text-white font-mono text-sm leading-snug">{engine}</strong>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-primary bg-[#25D366] hover:bg-[#1EBE5A] hover:border-transparent text-white">WhatsApp About This Bike</a>
+            <MessengerCTA label="Message Nakaja" />
+          </div>
+        </div>
+
+        <Viewer3D modelPath={modelPath} posterImage={heroImage} title={title} />
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-[1280px] mx-auto px-6 py-14 md:py-20">
+    <section class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 lg:gap-14 mb-20">
+      <div>
+        <div class="mb-12">
+          <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase mb-5">Built For Practical Ownership</h2>
+          <div class="prose prose-invert prose-p:font-body prose-p:text-secondary prose-p:leading-relaxed prose-headings:font-display max-w-none text-secondary">
+            <Content />
+          </div>
+        </div>
+
+        <div class="mb-12">
+          <div class="flex items-end justify-between gap-4 mb-6">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase">Specs</h2>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-secondary">Verify before purchase</span>
+          </div>
+          <SpecGrid specs={specs} />
+        </div>
+
+        <div class="mb-12">
+          <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase mb-6">Gallery</h2>
+          <ProductGallery images={gallery.length > 0 ? gallery : heroImage ? [heroImage] : []} title={title} />
+        </div>
+      </div>
+
+      <aside class="space-y-6 lg:sticky lg:top-28 self-start">
+        <div class="card p-6 bg-surface-container border border-metal/20">
+          <h2 class="text-2xl font-display font-bold text-white uppercase mb-3">Talk To Sales</h2>
+          <p class="text-secondary font-body mb-5">Ask for availability, current offer, and what you need to ride out.</p>
+          <div class="grid grid-cols-1 gap-3">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-primary bg-[#25D366] hover:bg-[#1EBE5A] hover:border-transparent text-white">WhatsApp Prefilled</a>
+            <MessengerCTA />
+            <a href="/contact" class="btn-secondary">Visit Showroom</a>
+          </div>
+          <p class="mt-5 text-secondary font-mono text-xs">{dealer.location}</p>
+        </div>
+
+        <FinancingCTA
+          compact
+          title="Want This Model On Finance?"
+          subtitle={`Send a request for ${title}. Nakaja Bikes will help you confirm current Watu or Fortune terms.`}
+          ctaText="Open Financing Page"
+          ctaHref="/financing"
+        />
+      </aside>
+    </section>
+
+    <section class="mb-20">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-8">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase mb-3">Financing Options</h2>
+          <p class="text-secondary font-body max-w-2xl">Compare the current listed cash, Watu, and Fortune options for this model.</p>
+        </div>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="font-mono text-xs uppercase tracking-widest text-primary-container hover:text-white transition-colors">Confirm current offer</a>
+      </div>
+      <FinanceCards cashPrice={cashPrice} deposit={deposit} watuPlan={watuPlan} fortunePlan={fortunePlan} />
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+      <LeadForm models={[title, ...modelNames.filter((modelName) => modelName !== title)]} />
+      <div class="card p-8 bg-surface-container border border-metal/20 flex flex-col justify-between">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.24em] text-primary-container mb-4">Showroom CTA</p>
+          <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase mb-5">See The Bike In Industrial Area</h2>
+          <p class="text-secondary font-body leading-relaxed mb-8">Visit Nakaja Bikes to inspect the model, confirm the latest financing requirements, and talk through your route, load, and daily repayment target.</p>
+        </div>
+        <div class="space-y-4">
+          <p class="font-mono text-sm text-white">{dealer.location}</p>
+          <p class="font-mono text-sm text-secondary">{dealer.phoneDisplay}</p>
+          <a href="/contact" class="btn-primary">Get Directions And Contact</a>
+        </div>
+      </div>
+    </section>
+
+    {relatedProducts.length > 0 && (
+      <section>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-8">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase mb-3">Related Models</h2>
+            <p class="text-secondary font-body">Compare other UM motorcycles before you decide.</p>
+          </div>
+          <a href="/motorcycles" class="btn-secondary">View Full Catalogue</a>
+        </div>
+        <ProductGrid products={relatedProducts} />
+      </section>
+    )}
+  </div>
+</Layout>

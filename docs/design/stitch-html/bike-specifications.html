@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Hanken+Grotesk:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#2a2a2a",
+                    "surface-variant": "#353534",
+                    "surface-container": "#201f1f",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary": "#2f3131",
+                    "on-surface-variant": "#e6bdbb",
+                    "on-error": "#690005",
+                    "surface-container-low": "#1c1b1b",
+                    "on-tertiary-container": "#fbfbfb",
+                    "primary": "#ffb3b1",
+                    "surface-dim": "#131313",
+                    "on-surface": "#e5e2e1",
+                    "primary-container": "#e31837",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "on-primary": "#680011",
+                    "on-primary-container": "#fffaf9",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "on-error-container": "#ffdad6",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary-fixed": "#410007",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "error-container": "#93000a",
+                    "outline": "#ad8886",
+                    "tertiary-container": "#727474",
+                    "on-primary-fixed-variant": "#92001d",
+                    "secondary": "#c6c6c6",
+                    "inverse-on-surface": "#313030",
+                    "background": "#131313",
+                    "surface-tint": "#ffb3b1",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-secondary-container": "#b8b8b8",
+                    "surface-bright": "#393939",
+                    "tertiary": "#c6c6c7",
+                    "primary-fixed": "#ffdad8",
+                    "secondary-fixed": "#e3e2e2",
+                    "on-tertiary": "#2f3131",
+                    "error": "#ffb4ab",
+                    "surface-container-highest": "#353534",
+                    "on-secondary-fixed-variant": "#464747",
+                    "outline-variant": "#5d3f3e",
+                    "secondary-container": "#484949",
+                    "inverse-primary": "#bf0029",
+                    "surface": "#131313",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "section-gap-mobile": "64px",
+                    "unit": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "section-gap-desktop": "120px"
+            },
+            "fontFamily": {
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Space Grotesk"],
+                    "display-lg": ["Space Grotesk"],
+                    "cta-label": ["Space Grotesk"],
+                    "headline-lg": ["Space Grotesk"],
+                    "headline-md": ["Space Grotesk"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "cta-label": ["16px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(192, 192, 192, 0.15);
+        }
+        .metallic-border {
+            border: 1px solid rgba(192, 192, 192, 0.2);
+        }
+        .inner-glow {
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+        }
+        .racing-gradient {
+            background: linear-gradient(135deg, #e31837 0%, #92001d 100%);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #e31837; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-secondary/20 shadow-[0_1px_0_0_rgba(198,198,198,0.1)]">
+<div class="flex justify-between items-center px-margin-mobile h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform">menu</span>
+<h1 class="font-headline-md-mobile text-headline-md-mobile font-bold tracking-widest text-primary uppercase">NAKAJA BIKES</h1>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform">shopping_cart</span>
+</div>
+</div>
+</header>
+<main class="pt-16 pb-24 lg:pb-0 lg:max-w-container-max lg:mx-auto">
+<!-- Hero Gallery -->
+<section class="relative w-full h-[530px] lg:h-[751px] overflow-hidden">
+<img alt="Flagship Motorcycle Side View" class="w-full h-full object-cover" data-alt="A side-profile shot of a high-end flagship motorcycle parked in a dramatic, dark-themed industrial showroom with polished concrete floors. Sharp, cinematic overhead spotlights reflect off the metallic crimson and carbon-fiber bodywork, highlighting the precision-engineered engine components and aerodynamic curves. The lighting is low-key, creating a moody, prestigious atmosphere with deep shadows and brilliant highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCweIWujQvj4iBceAtQDItQqcZ3h7ZqqGS7u0KkLdFT93lTWyglZZk77GF5EEY5qb2w5FBbOskHQxVBTzCeoPaCIhOYu9q3xXRmZsvhof1vgdqESm2GOgo-15Tlw2TFi2fLfUnoHKcEuFNPrWXXFU5WPqsEDxykPVw2oXLlZk_MI-YKrlEgmkLfHHjzscRzxM8DqBNIjrEAi3alakSJEmUlDRdJ9GHTKUrWnHhJd1qvemW3prb1VzzIGmWyxnYHxVaYl6rK5xS0VNw"/>
+<div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-background to-transparent"></div>
+<div class="absolute bottom-8 left-margin-mobile right-margin-mobile flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">2024 Flagship Series</span>
+<h2 class="font-display-lg text-headline-lg lg:text-display-lg text-on-surface uppercase tracking-tighter">APEX 1200R</h2>
+</div>
+</section>
+<!-- Thumbnail Strip -->
+<section class="px-margin-mobile py-8 overflow-x-auto">
+<div class="flex gap-4 min-w-max">
+<div class="w-32 h-20 metallic-border overflow-hidden active:scale-95 transition-transform">
+<img alt="Tank Detail" class="w-full h-full object-cover opacity-100" data-alt="Close-up detail of a motorcycle fuel tank in deep metallic red, reflecting studio lights. The Nakaja brand logo is visible in a brushed silver finish. Cinematic lighting emphasizes the smooth, curved surface and premium paint quality within a dark, controlled environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ8Xa6AOEFZbp7MPsRATY0Q_5UyJ1sPBgstk31M2l4BOAqJa6Ud6HNJoWfFr8YwnjTFoXXkHnkAtujqzeeaCCOEoS8cHfzK18ANcGfwC4I6jxN55BR5Pnc3uEXB322PAVv_O5qrUPJn9FW51Q9Vy4vsSsqmCbiHK1RGvrWmhiYQadc6m7PGwWG0JIJyDp9LORr_o0Ig2L9MgpgB-hI3O3e1C3zrGv3TZ93bWTBN5R_pMLkpuKi1Ct4Kpzx8QNoRSSRnzf2T2JHvcA"/>
+</div>
+<div class="w-32 h-20 border border-primary overflow-hidden active:scale-95 transition-transform">
+<img alt="Engine Detail" class="w-full h-full object-cover grayscale" data-alt="Macro view of a high-performance motorcycle engine, showing the intricate mechanical parts, cooling fins, and exposed bolts in a technical, industrial style. The scene is lit with cold, white light that highlights the machined steel textures and raw engineering power of the Nakaja flagship bike." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGTNVwWRe79MDskXFxP0jidrAW0jiwyaggORThBSv6ztViwHYApABmPCoGnevw3RTB2QP4Pn8al5JsPvmkNTc84B19mm03qEBYfHyYXcC1GN_xjvpbK0A8V5v7zIx7r6t_UodhLJjSCNTPWgowJZzuOKWDZPoQa6x0GMMqjNhiJ4iCx8N0v1Jpnjix2E_m3jeDl2pDhDGVzWjjlPOdEVd3xTLtJDFWiD7UXzBr8Gwmbx-sOXGtA_VCqBH_gYuoMks8bOwiy-fcodc"/>
+</div>
+<div class="w-32 h-20 border border-secondary/20 overflow-hidden active:scale-95 transition-transform">
+<img alt="Rear Assembly" class="w-full h-full object-cover grayscale" data-alt="A focused shot of the rear wheel and exhaust system of a sports motorcycle. The carbon fiber silencer and gold-linked chain are sharp and detailed. The background is a blurred industrial garage with hints of neon red lighting, emphasizing the bike's racing DNA and high-end componentry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcyUMLVIF8NXAMoxWo-oSoutPS-6w7r2KGWN864qihxNWacyM2Wubm_H9fjeyFg1Utl3xkmUksI3rftheWFVX_7zd6KZjkONDiidPKNE2-CfDrlT6wlAiCgof-1YVwkFJ48uLlBxySTzyaQs0f5wr8UvN5qc0WRWI_e25BoC70n_HONoMQJ3pkq0Cill78SkTlJYR1G0VyESJdoZPhvK7_C-SQt_3oRIrq0FO1tdAW53ut6hGXWTCgRTgiVwiltnvBr__W03rRdT0"/>
+</div>
+<div class="w-32 h-20 border border-secondary/20 overflow-hidden active:scale-95 transition-transform">
+<img alt="Cockpit Detail" class="w-full h-full object-cover grayscale" data-alt="The digital cockpit and handlebars of a modern motorcycle. The TFT display is illuminated, showing speed and performance data. Soft ambient red lighting glows from the dashboard buttons against a dark, nocturnal setting, conveying a sense of advanced technology and rider-focused precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIXf9TBHtJ7L7_9MHLnzxCWrVph0WOnaIeaBEQNyDL2X1H7t0M039TRSB8rGqZhnfsNX3cF7XqUrUw0gFUxOlX5cb6oZ5vbeYI3NPAOQX1dd_zRpcJJytz9bKAtifADke_wygEOA4QRpBfZR94wxOnX1Pef1FDuS6f3I4bdJSjuocw7vDkzaUtVjHCNm83yNeSSFDlHAB7LHkdDRVl18dcNgKNEtrSxTbxvYWziNyET-6KR25Qz5a6VKye6GgVxk5_GpvjOkQJjq0"/>
+</div>
+</div>
+</section>
+<!-- Technical Specs Bento Grid -->
+<section class="px-margin-mobile py-section-gap-mobile lg:grid lg:grid-cols-12 lg:gap-gutter">
+<div class="lg:col-span-8 space-y-12">
+<div class="space-y-4">
+<h3 class="font-headline-md text-headline-md text-primary-fixed uppercase tracking-tight">Technical Dominance</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-1">
+<div class="glass-panel p-6 flex flex-col justify-between h-40 inner-glow">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Power Output</span>
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface">205</span>
+<span class="text-primary ml-1 font-label-caps">BHP</span>
+</div>
+</div>
+<div class="glass-panel p-6 flex flex-col justify-between h-40 inner-glow">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Peak Torque</span>
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface">112</span>
+<span class="text-primary ml-1 font-label-caps">NM</span>
+</div>
+</div>
+<div class="glass-panel p-6 flex flex-col justify-between h-40 inner-glow">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Efficiency</span>
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface">18.5</span>
+<span class="text-primary ml-1 font-label-caps">KM/L</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Spec Details -->
+<div class="space-y-6">
+<div class="flex items-center justify-between border-b border-secondary/10 pb-4">
+<span class="font-body-lg text-on-surface-variant">Engine Displacement</span>
+<span class="font-label-caps text-on-surface">1198 cc L-Twin</span>
+</div>
+<div class="flex items-center justify-between border-b border-secondary/10 pb-4">
+<span class="font-body-lg text-on-surface-variant">Transmission</span>
+<span class="font-label-caps text-on-surface">6-Speed Constant Mesh</span>
+</div>
+<div class="flex items-center justify-between border-b border-secondary/10 pb-4">
+<span class="font-body-lg text-on-surface-variant">Curb Weight</span>
+<span class="font-label-caps text-on-surface">192 KG</span>
+</div>
+<div class="flex items-center justify-between border-b border-secondary/10 pb-4">
+<span class="font-body-lg text-on-surface-variant">Braking System</span>
+<span class="font-label-caps text-on-surface">Brembo Monobloc M50</span>
+</div>
+</div>
+</div>
+<!-- Financing Calculator Card -->
+<aside class="lg:col-span-4 mt-section-gap-mobile lg:mt-0">
+<div class="glass-panel p-8 inner-glow sticky top-24">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-6 uppercase">Financing</h4>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-label-caps text-secondary">Deposit (%)</span>
+<span class="font-label-caps text-primary">30%</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="absolute top-0 left-0 h-full w-[30%] bg-primary"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-label-caps text-secondary">Duration (Months)</span>
+<span class="font-label-caps text-primary">36</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="absolute top-0 left-0 h-full w-[60%] bg-primary"></div>
+</div>
+</div>
+<div class="pt-6 border-t border-secondary/10">
+<span class="font-label-caps text-label-caps text-secondary block mb-2">Monthly Installment</span>
+<div class="text-headline-md font-headline-md text-on-surface">KES 48,500 <span class="text-sm font-normal text-secondary">/mo</span></div>
+</div>
+<div class="space-y-4">
+<button class="w-full py-4 bg-primary-container text-on-primary-container font-cta-label uppercase tracking-widest active:scale-95 transition-all inner-glow">
+                                Apply for Financing
+                            </button>
+<button class="w-full py-4 border border-secondary/30 text-on-surface font-cta-label uppercase tracking-widest flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+                                Negotiate on WhatsApp
+                            </button>
+</div>
+</div>
+</div>
+</aside>
+</section>
+<!-- Engineering Callout -->
+<section class="py-section-gap-mobile px-margin-mobile text-center">
+<h3 class="font-headline-lg text-headline-lg uppercase mb-4 text-primary">Crafted for Excellence</h3>
+<p class="max-w-2xl mx-auto font-body-lg text-on-surface-variant">
+                Every Apex 1200R is hand-assembled by master technicians in our flagship facility. Experience the pinnacle of performance and reliability engineered for the demanding Kenyan terrain.
+            </p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-low/90 backdrop-blur-2xl border-t border-secondary/15 shadow-[0_-2px_10px_0_rgba(0,0,0,0.5)]">
+<div class="flex justify-around items-center h-20 pb-safe px-2">
+<div class="flex flex-col items-center justify-center text-secondary/60 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="motorcycle">motorcycle</span>
+<span class="font-label-caps text-label-caps mt-1">Showroom</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary fill-primary active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-caps text-label-caps mt-1">Bikes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary/60 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="handyman">handyman</span>
+<span class="font-label-caps text-label-caps mt-1">Service</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary/60 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-label-caps text-label-caps mt-1">Parts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary/60 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-label-caps text-label-caps mt-1">Inquiry</span>
+</div>
+</div>
+</nav>
+<!-- Footer for Desktop -->
+<footer class="hidden lg:block border-t border-secondary/10 bg-surface-container-lowest py-16 mt-section-gap-desktop">
+<div class="max-w-container-max mx-auto px-margin-mobile grid grid-cols-4 gap-gutter">
+<div>
+<h4 class="font-headline-md text-primary mb-6">NAKAJA</h4>
+<p class="text-secondary/70 font-body-md">Precision engineering for the bold. Experience the ultimate ride in Kenya.</p>
+</div>
+<div>
+<h5 class="font-label-caps text-on-surface mb-6 uppercase">Showroom</h5>
+<ul class="space-y-3 text-secondary/70">
+<li class="hover:text-primary cursor-pointer transition-colors">Nairobi Flagship</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Mombasa Center</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Kisumu Outlet</li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-caps text-on-surface mb-6 uppercase">Quick Links</h5>
+<ul class="space-y-3 text-secondary/70">
+<li class="hover:text-primary cursor-pointer transition-colors">Book a Service</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Spare Parts</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Financing Plans</li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-caps text-on-surface mb-6 uppercase">Newsletter</h5>
+<div class="flex">
+<input class="bg-surface-container border border-secondary/20 px-4 py-2 w-full font-label-caps text-on-surface focus:border-primary outline-none" placeholder="ENTER EMAIL" type="email"/>
+<button class="bg-primary-container px-4 text-on-primary-container">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

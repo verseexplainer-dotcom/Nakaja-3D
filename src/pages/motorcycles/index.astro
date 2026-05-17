@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import FinancingCTA from '../../components/FinancingCTA.astro';
+import { buildWhatsAppUrl } from '../../lib/contact';
+import { getCollection } from 'astro:content';
+
+const products = (await getCollection('products')).sort((a, b) => {
+  const aOrder = a.data.featuredOrder ?? 99;
+  const bOrder = b.data.featuredOrder ?? 99;
+  return aOrder - bOrder || a.data.title.localeCompare(b.data.title);
+});
+
+const featuredCount = products.filter((product) => product.data.featured).length;
+const whatsappMessage = 'Hi Nakaja Bikes, I want to compare available UM motorcycles and financing options.';
+const whatsappUrl = buildWhatsAppUrl(whatsappMessage);
+---
+<Layout
+  title="Motorcycles | Nakaja Bikes Nairobi"
+  description="Browse UM motorcycles from Nakaja Bikes in Nairobi. Compare cash prices, deposits, financing plans, and product details before you WhatsApp the showroom."
+  canonicalPath="/motorcycles/"
+>
+  <section class="relative overflow-hidden border-b border-metal/20 bg-[radial-gradient(circle_at_70%_10%,rgba(227,24,55,0.18),transparent_34%),linear-gradient(135deg,#0e0e0e,#201f1f_55%,#131313)]">
+    <div class="max-w-[1280px] mx-auto px-6 py-16 md:py-24">
+      <p class="font-mono text-xs uppercase tracking-[0.28em] text-primary-container mb-5">Nakaja Bikes Catalogue</p>
+      <div class="max-w-4xl">
+        <h1 class="text-5xl md:text-7xl font-display font-bold text-white uppercase mb-6 tracking-tighter">Motorcycles Built For The Daily Hustle</h1>
+        <p class="text-lg md:text-xl text-secondary font-body leading-relaxed max-w-3xl">
+          Compare UM models for boda boda work, delivery runs, commuting, and tougher road conditions. Prices and financing are shown clearly so you can move fast and confirm the current offer with Nakaja Bikes.
+        </p>
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-3" aria-label="Catalogue highlights">
+        <span class="border border-metal/20 bg-black/30 px-4 py-3 font-mono text-xs uppercase tracking-widest text-secondary">{products.length} models listed</span>
+        <span class="border border-metal/20 bg-black/30 px-4 py-3 font-mono text-xs uppercase tracking-widest text-secondary">{featuredCount} featured picks</span>
+        <a href="#financing" class="border border-primary-container/50 bg-primary-container/10 px-4 py-3 font-mono text-xs uppercase tracking-widest text-white hover:bg-primary-container transition-colors">Financing options</a>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="border border-[#25D366]/50 bg-[#25D366]/10 px-4 py-3 font-mono text-xs uppercase tracking-widest text-white hover:bg-[#25D366] transition-colors">Ask on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-[1280px] mx-auto px-6 py-14 md:py-20">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase mb-3">Available Models</h2>
+        <p class="text-secondary font-body max-w-2xl">Choose the bike that fits your work, route, loading needs, and repayment preference.</p>
+      </div>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-primary bg-[#25D366] hover:bg-[#1EBE5A] hover:border-transparent text-white">WhatsApp Nakaja</a>
+    </div>
+
+    <ProductGrid products={products} />
+  </section>
+
+  <section id="financing" class="max-w-[1280px] mx-auto px-6 pb-16 md:pb-24">
+    <FinancingCTA
+      title="Need Help Choosing A Financing Plan?"
+      subtitle="Tell us the model you want and whether you prefer daily, weekly, or cash purchase. Nakaja Bikes will help you confirm the current partner offer."
+      ctaText="Request Financing Guidance"
+      ctaHref="/financing"
+    />
+  </section>
+</Layout>

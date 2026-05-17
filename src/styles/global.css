@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #131313;
+  --color-on-background: #e5e2e1;
+
+  --color-surface: #131313;
+  --color-surface-dim: #131313;
+  --color-surface-bright: #393939;
+  --color-surface-container: #201f1f;
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #e6bdbb;
+
+  --color-primary: #ffb3b1;
+  --color-primary-container: #e31837;
+  --color-on-primary-container: #fffaf9;
+  --color-inverse-primary: #bf0029;
+
+  --color-secondary: #c6c6c6;
+  --color-on-secondary: #2f3131;
+
+  --color-outline: #ad8886;
+  --color-outline-variant: #5d3f3e;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Hanken Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-metal: #c0c0c0;
+}
+
+@layer base {
+  html, body {
+    @apply bg-background text-on-background font-body antialiased selection:bg-primary-container selection:text-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+
+  a, button, input, select, textarea {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-container focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-container text-on-primary-container font-display font-bold px-8 py-4 rounded-none transition-all duration-300 border border-transparent hover:bg-[#a01026] hover:border-metal inline-flex items-center justify-center text-center;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-secondary font-display font-bold px-8 py-4 rounded-none transition-all duration-300 border border-metal hover:bg-metal hover:text-black inline-flex items-center justify-center text-center;
+  }
+
+  .glass-panel {
+    @apply bg-black/70 backdrop-blur-[20px] border border-metal/20 rounded-none;
+  }
+
+  .card {
+    @apply border border-metal/20 rounded-none transition-all duration-300 hover:border-metal/50 bg-gradient-to-t from-transparent to-transparent hover:from-black/80 block;
+  }
+
+  .input-field {
+    @apply w-full bg-transparent border-b border-metal/30 font-mono text-on-surface px-4 py-3 focus:outline-none focus:border-b focus:border-primary-container transition-colors placeholder:text-secondary/50;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}

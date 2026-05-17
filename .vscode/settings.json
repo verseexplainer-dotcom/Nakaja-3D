@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "src/content/**/*.md": "markdown"
+  },
+  "yaml.schemas": {
+    "none": "src/content/**/*.md"
+  }
+}

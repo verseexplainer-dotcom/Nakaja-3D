@@ -1,17 +1,246 @@
 ---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import HeroShowroom from '../components/HeroShowroom.astro';
+import ProductCard from '../components/ProductCard.astro';
+import MessengerCTA from '../components/MessengerCTA.astro';
+import dealer from '../data/dealer.json';
+import { buildWhatsAppUrl } from '../lib/contact';
 
+const allProducts = await getCollection('products');
+const products = allProducts.sort((a, b) => (a.data.featuredOrder ?? 99) - (b.data.featuredOrder ?? 99));
+const featuredProducts = products.filter((product) => product.data.featured).slice(0, 3);
+const ndume = products.find((product) => product.id === 'duty-max-xl-150') ?? featuredProducts[0] ?? products[0];
+const xl125 = products.find((product) => product.id === 'duty-max-xl-125') ?? featuredProducts[1] ?? products[0];
+
+const whatsappMessage = 'Hi Nakaja Bikes, I want to book on WhatsApp and ask about UM motorcycle options.';
+const whatsappUrl = buildWhatsAppUrl(whatsappMessage);
+const financingMessage = 'Hi Nakaja Bikes, I want to check current financing options for a UM motorcycle.';
+const financingWhatsappUrl = buildWhatsAppUrl(financingMessage);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Nakaja Bikes | Authorized UM Motorbikes Dealer in Nairobi"
+  description="Nakaja Bikes is an authorized UM Motorbikes dealer in Nairobi with rugged commuter motorcycles, cash options, financing support, and direct WhatsApp booking."
+  canonicalPath="/"
+>
+  <HeroShowroom
+    title="Own the road. Build your hustle."
+    subtitle="Nakaja Bikes supplies rugged UM motorcycles for boda boda work, daily commuting, and city movement from our Industrial Area showroom."
+    actions={[
+      { label: 'Book on WhatsApp', href: whatsappUrl, variant: 'whatsapp', external: true },
+      { label: 'View Motorcycles', href: '/motorcycles', variant: 'secondary' },
+      { label: 'Check Financing', href: '/financing', variant: 'secondary' },
+    ]}
+  />
+
+  <section class="border-b border-metal/20 bg-surface-container/40 reveal-section">
+    <div class="max-w-[1280px] mx-auto px-6 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-metal/20">
+      {[
+        'Authorized UM Motorbikes Dealer',
+        'Nairobi Industrial Area showroom',
+        'Cash and financing options',
+        'WhatsApp booking available',
+      ].map((item) => (
+        <div class="bg-[#131313] px-5 py-5 min-h-24 flex items-center">
+          <p class="font-mono text-xs uppercase tracking-[0.18em] text-white leading-relaxed">{item}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="max-w-[1280px] mx-auto px-6 py-16 md:py-24 reveal-section">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.28em] text-primary-container mb-4">Featured Models</p>
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight mb-4">Work-ready UM bikes</h2>
+        <p class="text-secondary font-body max-w-2xl">Clear model names, cash prices, and listed financing options so you can compare fast before visiting or messaging Nakaja.</p>
+      </div>
+      <a href="/motorcycles" class="btn-secondary self-start md:self-auto">View Full Catalogue</a>
+    </div>
+
+    {featuredProducts.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+        {featuredProducts.map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </div>
+    ) : (
+      <div class="border border-metal/20 bg-surface-container p-8 text-secondary font-mono text-sm">Featured motorcycle content is pending.</div>
+    )}
+  </section>
+
+  <section class="border-y border-metal/20 bg-[radial-gradient(circle_at_20%_0%,rgba(227,24,55,0.16),transparent_32%),#201f1f] reveal-section">
+    <div class="max-w-[1280px] mx-auto px-6 py-16 md:py-24">
+      <div class="max-w-3xl mb-10">
+        <p class="font-mono text-xs uppercase tracking-[0.28em] text-primary-container mb-4">Financing Preview</p>
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight mb-4">Choose the route that fits your daily cashflow</h2>
+        <p class="text-secondary font-body">Compare Watu and Fortune examples, then confirm the current offer directly with Nakaja Bikes.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <article class="glass-panel p-7 md:p-8 border-l-2 border-l-[#F0B90B]">
+          <div class="flex items-start justify-between gap-6 mb-8">
+            <div>
+              <h3 class="text-3xl font-display font-bold text-white uppercase mb-2">Watu Credit</h3>
+              <p class="text-secondary font-body">Example terms currently listed for selected Duty Max models.</p>
+            </div>
+            <span class="font-mono text-xs text-[#F0B90B] uppercase tracking-widest">Weekly / Daily</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <div class="border border-metal/20 bg-black/30 p-5">
+              <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">{xl125?.data.title}</span>
+              <strong class="block text-white font-display text-2xl mb-1">KSh {xl125?.data.cashPrice.toLocaleString()}</strong>
+              <span class="block text-secondary font-mono text-sm">Downpayment KSh {xl125?.data.deposit.toLocaleString()}</span>
+              <span class="block text-[#F0B90B] font-mono text-sm mt-2">{xl125?.data.watuPlan}</span>
+            </div>
+            <div class="border border-metal/20 bg-black/30 p-5">
+              <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">{ndume?.data.title}</span>
+              <strong class="block text-white font-display text-2xl mb-1">KSh {ndume?.data.cashPrice.toLocaleString()}</strong>
+              <span class="block text-secondary font-mono text-sm">Downpayment KSh {ndume?.data.deposit.toLocaleString()}</span>
+              <span class="block text-[#F0B90B] font-mono text-sm mt-2">{ndume?.data.watuPlan}</span>
+            </div>
+          </div>
+          <a href="/financing" class="btn-primary">Compare Financing</a>
+        </article>
+
+        <article class="glass-panel p-7 md:p-8 border-l-2 border-l-[#00A859]">
+          <div class="flex items-start justify-between gap-6 mb-8">
+            <div>
+              <h3 class="text-3xl font-display font-bold text-white uppercase mb-2">Fortune Credit</h3>
+              <p class="text-secondary font-body">Daily repayment examples where listed for models in the catalogue.</p>
+            </div>
+            <span class="font-mono text-xs text-[#00A859] uppercase tracking-widest">Daily</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            {featuredProducts.slice(0, 2).map((product) => (
+              <div class="border border-metal/20 bg-black/30 p-5">
+                <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">{product.data.title}</span>
+                <strong class="block text-white font-display text-2xl mb-1">Deposit KSh {product.data.deposit.toLocaleString()}</strong>
+                <span class="block text-[#00A859] font-mono text-sm">{product.data.fortunePlan}</span>
+              </div>
+            ))}
+          </div>
+          <a href={financingWhatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary">Confirm Current Offer</a>
+        </article>
+      </div>
+      <p class="text-secondary font-mono text-xs mt-6">Rates and approval are subject to financing partner terms. Confirm current offer with Nakaja Bikes.</p>
+    </div>
+  </section>
+
+  <section class="max-w-[1280px] mx-auto px-6 py-16 md:py-24 reveal-section">
+    <div class="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-start">
+      <div class="lg:sticky lg:top-28">
+        <p class="font-mono text-xs uppercase tracking-[0.28em] text-primary-container mb-4">Why Nakaja</p>
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight mb-5">Built around real riders, not showroom noise</h2>
+        <p class="text-secondary font-body leading-relaxed">You need a bike that can work, earn, move, and get support when it matters. Nakaja keeps the conversation practical.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-metal/20 border border-metal/20">
+        {[
+          ['Rugged commuter bikes', 'UM models selected for daily movement, city routes, and practical ownership.'],
+          ['Boda boda business reliability', 'Clear specs, warranty notes, and support context for riders who work long days.'],
+          ['Flexible financing support', 'Cash, Watu, and Fortune options are presented clearly where rates are available.'],
+          ['Industrial Area showroom support', 'Visit, inspect, ask questions, and confirm the current offer before committing.'],
+          ['Honest current rates', 'No invented approvals or exaggerated promises. Confirm the latest terms with Nakaja.'],
+          ['WhatsApp-first service', 'Start the conversation quickly and get routed to the model or financing question you care about.'],
+        ].map(([title, copy]) => (
+          <article class="bg-surface-container p-6 md:p-8 min-h-56">
+            <h3 class="text-2xl font-display font-bold text-white uppercase mb-4">{title}</h3>
+            <p class="text-secondary font-body leading-relaxed">{copy}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-[1280px] mx-auto px-6 pb-16 md:pb-24 reveal-section">
+    <div class="relative overflow-hidden border border-metal/20 bg-[#0e0e0e] p-7 md:p-12">
+      <div class="absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_80%_30%,rgba(227,24,55,0.20),transparent_36%)]"></div>
+      <div class="relative grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-10 items-end">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.28em] text-primary-container mb-4">Showroom</p>
+          <h2 class="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight mb-5">Visit Nakaja Bikes in Industrial Area</h2>
+          <p class="text-secondary font-body max-w-2xl leading-relaxed mb-8">See the bikes, ask about financing requirements, and confirm current availability before you ride out.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div class="border border-metal/20 bg-black/30 p-4">
+              <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">Location</span>
+              <strong class="block text-white font-body">{dealer.location}</strong>
+            </div>
+            <div class="border border-metal/20 bg-black/30 p-4">
+              <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">WhatsApp</span>
+              <strong class="block text-white font-mono">{dealer.phoneDisplay}</strong>
+            </div>
+            <div class="border border-metal/20 bg-black/30 p-4">
+              <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">Website</span>
+              <strong class="block text-white font-mono">nakajabikes.co.ke</strong>
+            </div>
+          </div>
+          <a href="/contact" class="btn-primary">Plan Your Visit</a>
+        </div>
+        <div class="border border-metal/20 bg-surface-container p-6">
+          <p class="font-mono text-xs uppercase tracking-widest text-secondary mb-4">Showroom support</p>
+          <ul class="space-y-4 text-secondary font-body">
+            <li class="border-b border-metal/20 pb-4">Confirm cash price and partner financing terms.</li>
+            <li class="border-b border-metal/20 pb-4">Compare models for your route, load, and daily target.</li>
+            <li>Ask about warranty and maintenance expectations before purchase.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-metal/20 bg-primary-container reveal-section">
+    <div class="max-w-[1280px] mx-auto px-6 py-14 md:py-16 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.28em] text-white/80 mb-3">Final CTA</p>
+        <h2 class="text-4xl md:text-6xl font-display font-black text-white uppercase tracking-tighter">Ready to start your ride?</h2>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-white text-black font-display font-bold px-8 py-4 uppercase tracking-wider inline-flex items-center justify-center text-center hover:bg-metal transition-colors">WhatsApp Nakaja</a>
+        <MessengerCTA label="Chat on Messenger" />
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduceMotion) {
+      const sections = document.querySelectorAll<HTMLElement>('.reveal-section');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.16 });
+
+      sections.forEach((section) => revealObserver.observe(section));
+    } else {
+      document.querySelectorAll<HTMLElement>('.reveal-section').forEach((section) => {
+        section.classList.add('is-visible');
+      });
+    }
+  </script>
+
+  <style>
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-section {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</Layout>

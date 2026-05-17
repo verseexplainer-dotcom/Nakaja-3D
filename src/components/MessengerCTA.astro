@@ -1,0 +1,22 @@
+---
+import { publicMessengerLink } from '../lib/contact';
+
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const {
+  href = publicMessengerLink,
+  label = 'Chat on Messenger',
+} = Astro.props;
+---
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="btn-secondary"
+  aria-label="Open Nakaja Bikes Messenger chat"
+>
+  {label}
+</a>
