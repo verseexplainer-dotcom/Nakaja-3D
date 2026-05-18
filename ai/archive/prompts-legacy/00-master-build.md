@@ -311,6 +311,10 @@ functions/api/
 supabase/migrations/
 ai/skills/
 ai/prompts/
+ai/archive/
+docs/architecture/
+docs/integrations/
+docs/reference/design/
 
 --------------------------------------------------
 COMPONENT RULES

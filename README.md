@@ -1,82 +1,111 @@
 # Nakaja Bikes Website
 
-## Overview
+Production Astro site for Nakaja Bikes, an authorized UM Motorbikes dealer in Nairobi, Kenya.
 
-Nakaja Bikes is a production-ready motorcycle dealership website for an authorized UM Motorbikes dealer in Nairobi, Kenya.
+## Purpose
 
-The site is designed to sell motorcycles, explain financing options, capture leads, and push customers into WhatsApp or Messenger conversations quickly.
+The site exists to convert visitors into:
 
-The website must feel premium, rugged, fast, trustworthy, and built for the Kenyan boda boda market.
+- WhatsApp conversations
+- Messenger conversations
+- financing inquiries
+- showroom visits
+- callback leads
 
-## Business Goal
+The build must stay mobile-first, fast, honest, and practical for Nairobi riders and financing buyers.
 
-The website must help Nakaja Bikes:
+## Stack
 
-- Showcase UM motorcycle models
-- Convert visitors into WhatsApp conversations
-- Capture financing leads
-- Explain Watu Credit and Fortune Credit repayment options
-- Support mobile-first buyers
-- Build trust around the Industrial Area showroom
-- Prepare for Meta WhatsApp and Messenger automation
-
-Primary conversion actions:
-
-- Book on WhatsApp
-- Request financing
-- View motorcycles
-- Visit showroom
-- Send Messenger inquiry
-- Request callback
-
-## Target Market
-
-Primary users:
-
-- Nairobi boda boda riders
-- Delivery riders
-- Daily-income hustlers
-- Motorcycle entrepreneurs
-- Commuters
-- Riders upgrading from old bikes
-- Buyers comparing deposit and repayment options
-
-They care about:
-
-- Daily repayment
-- Deposit amount
-- Cash price
-- Fuel economy
-- Durability
-- Spare parts and support
-- Fast approval
-- Trustworthy dealer
-- Clear WhatsApp response
-
-## Tech Stack
-
-Use:
-
-- Astro static site
+- Astro static frontend
 - Tailwind CSS
 - TypeScript
 - Cloudflare Pages
 - Cloudflare Pages Functions
-- Supabase
-- Cloudinary
-- GSAP
-- Three.js
-- Swiper
-- Lenis
+- Supabase for leads, auth domains, appointments, and chat logs
+- Cloudinary for heavy public media delivery
+- GSAP, Swiper, and Three.js only where they earn their cost
 
-Avoid:
+## Operating Rules
 
-- Heavy SSR
-- Unnecessary React
-- Framer Motion unless a React island is already necessary
-- Large client-side JavaScript
-- Supabase Storage for heavy public media
-- Exposing service role keys
-- Fake content
+- Root governance files are the first read for every task:
+  - `AGENTS.md`
+  - `README.md`
+  - `DESIGN.md`
+- Product and financing content must stay factual.
+- Do not invent specs, rates, reviews, or guarantees.
+- Keep server secrets out of browser bundles.
+- Treat the old Nakaja live stack as separate infrastructure.
 
+## Core Paths
 
+- `src/pages/` site routes
+- `src/components/` reusable UI
+- `src/content/products/` motorcycle content collection
+- `src/data/navigation/` navigation constants
+- `src/data/financing/` finance metadata
+- `src/lib/` browser-safe helpers and integration utilities
+- `functions/api/` Pages Functions endpoints
+- `supabase/migrations/` schema migrations
+- `ai/skills/` implementation rules
+- `ai/prompts/` task prompts
+- `ai/context/` project operating context for Codex sessions
+- `docs/` architecture, deployment, integration, and standards notes
+
+## Commands
+
+```bash
+npm run dev
+npm run check
+npm run build
+npm run preview
+npm run cf:dev
+```
+
+## Environment
+
+Public variables:
+
+- `PUBLIC_SITE_URL`
+- `PUBLIC_WHATSAPP_NUMBER`
+- `PUBLIC_MESSENGER_LINK`
+- `PUBLIC_SUPABASE_URL`
+- `PUBLIC_SUPABASE_ANON_KEY`
+
+Server-only variables:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `META_VERIFY_TOKEN`
+- `META_APP_SECRET`
+- `META_PAGE_ACCESS_TOKEN`
+- `WHATSAPP_ACCESS_TOKEN`
+- `WHATSAPP_PHONE_NUMBER_ID`
+
+See `.env.example` for the current template.
+
+## Deployment Shape
+
+- Build the static site with Astro.
+- Deploy frontend and `functions/api/` to Cloudflare Pages.
+- Run additive SQL from `supabase/migrations/` against the Nakaja Supabase project.
+- Keep heavy public images on Cloudinary in production.
+
+## Buyer Context
+
+Primary users:
+
+- boda boda riders
+- delivery riders
+- commuter riders
+- daily-income hustlers
+- motorcycle entrepreneurs
+- cash buyers
+- financing buyers
+
+They care about deposit, repayment, durability, support, location, and fast contact response.
+
+## Notes For Future Codex Sessions
+
+- Treat `ai/` as the canonical agent workspace.
+- Use the numbered prompts under `ai/prompts/` instead of the older legacy prompt names.
+- Archived legacy guidance lives under `ai/archive/` and `docs/archive/`.

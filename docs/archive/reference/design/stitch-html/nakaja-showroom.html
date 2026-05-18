@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Hanken+Grotesk:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffb3b1;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#2a2a2a",
+                        "surface-variant": "#353534",
+                        "surface-container": "#201f1f",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary": "#2f3131",
+                        "on-surface-variant": "#e6bdbb",
+                        "on-error": "#690005",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-container": "#fbfbfb",
+                        "primary": "#ffb3b1",
+                        "surface-dim": "#131313",
+                        "on-surface": "#e5e2e1",
+                        "primary-container": "#e31837",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "on-primary": "#680011",
+                        "on-primary-container": "#fffaf9",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed": "#410007",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "error-container": "#93000a",
+                        "outline": "#ad8886",
+                        "tertiary-container": "#727474",
+                        "on-primary-fixed-variant": "#92001d",
+                        "secondary": "#c6c6c6",
+                        "inverse-on-surface": "#313030",
+                        "background": "#131313",
+                        "surface-tint": "#ffb3b1",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary-container": "#b8b8b8",
+                        "surface-bright": "#393939",
+                        "tertiary": "#c6c6c7",
+                        "primary-fixed": "#ffdad8",
+                        "secondary-fixed": "#e3e2e2",
+                        "on-tertiary": "#2f3131",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#353534",
+                        "on-secondary-fixed-variant": "#464747",
+                        "outline-variant": "#5d3f3e",
+                        "secondary-container": "#484949",
+                        "inverse-primary": "#bf0029",
+                        "surface": "#131313",
+                        "on-background": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "section-gap-mobile": "64px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "section-gap-desktop": "120px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "display-lg": ["Space Grotesk"],
+                        "cta-label": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "cta-label": ["16px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest/80 backdrop-blur-xl border-b border-secondary/20 shadow-[0_1px_0_0_rgba(198,198,198,0.1)] fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-primary">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile font-bold tracking-widest text-primary uppercase">NAKAJA BIKES</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-primary">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</header>
+<main class="pt-16 pb-24">
+<!-- Cinematic Hero Section -->
+<section class="relative h-[751px] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A high-performance black and red racing motorcycle captured in a dramatic dark studio setting. Precise overhead spotlights catch the metallic curves of the chassis and the aggressive carbon fiber textures. The lighting is cinematic and moody, emphasizing the raw power of the machine with deep shadows and sharp, silver metallic highlights. The overall aesthetic is industrial and luxurious, reflecting a premium engineering brand." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAc4jr0A6miDsLHzKz2Cu5CUj2Rabm97XnFdpQoAwta449vFTCqmjgNU4ij7RsyX2nywx8NAspkHwLG5VmlZLsWNdu2fD06pRiPKu0ZQTpEQRavhKF7kHWQss-VjQ9b9cIDouZQLkdYTYvgLLGZ9sjnT515B4K9n8Uyadm7y1F-HwDbTl0h245VIfqwaacczflsRcNe6ch-NhSVADl7QL8AMApbchmYWyuZiN7mhC3JhI7S20emRemz0BuSw_Lo_hoKoD9F9Zh2hOE')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/40"></div>
+</div>
+<div class="relative h-full flex flex-col justify-end px-margin-mobile pb-12 max-w-container-max mx-auto w-full">
+<div class="space-y-4">
+<span class="bg-primary-container text-on-primary-container font-label-caps text-label-caps px-3 py-1 inline-block uppercase">New Arrival</span>
+<h2 class="font-display-lg text-display-lg text-on-surface leading-none max-w-2xl">PRECISION MEETS POWER.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Engineered for the rugged terrains of Kenya. Experience the ultimate performance with the Nakaja ZX-900 series.</p>
+<div class="pt-4">
+<button class="bg-primary-container text-on-primary-container font-cta-label text-cta-label px-8 py-4 uppercase flex items-center gap-2 hover:bg-red-700 transition-colors border border-secondary/20 shadow-lg">
+                            Explore Showroom
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Arrivals Horizontal Scroll -->
+<section class="mt-section-gap-mobile px-margin-mobile max-w-container-max mx-auto overflow-hidden">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">FEATURED ARRIVALS</h3>
+<div class="h-1 w-12 bg-primary-container mt-2"></div>
+</div>
+<button class="text-primary font-label-caps text-label-caps flex items-center gap-2 hover:opacity-80">
+                    VIEW ALL <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="flex gap-gutter overflow-x-auto pb-8 snap-x snap-mandatory">
+<!-- Card 1 -->
+<div class="min-w-[280px] md:min-w-[360px] snap-start group border border-secondary/15 relative">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A side view of a red high-performance motorcycle parked in an industrial garage with concrete floors. The bike features exposed mechanical components and a sleek, aggressive design. Harsh dramatic side-lighting creates strong highlights on the silver engine parts and crimson paint. The atmosphere is technical and masculine, with deep blacks and metallic textures predominating." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5peAmHbzoC1io0mqlZlPvQqr5CW0isNaTvrZgsrX53gaBB5omNlv5B5rF7dDEW05b33lQBCnQF9J0kvZr_KeNGBL4pPHw5G04i-_sPbWmWE0FsPUDiilBpd1KQXoJbk5rWWgLU7v9stkIggi1C8pIic3Or4BK3peuUE07wZPsHDepBBSXrPtardEt0SgQLee9df7hf2QIAIOSl3UuLdS7a42Bmy2xr-oz8Oiy_m89g7NRdtg7mzd_bzIOAHt2DqigM_jxay735pQ"/>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-background to-transparent">
+<h4 class="font-headline-md text-headline-md text-on-surface">ZX-900 STEALTH</h4>
+<p class="font-label-caps text-label-caps text-primary mt-1">KSH 1,250,000</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[280px] md:min-w-[360px] snap-start group border border-secondary/15 relative">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A modern off-road motorcycle equipped with rugged tires and heavy-duty suspension, showcased in a minimalist dark environment. The lighting emphasizes the texture of the mudguards and the metallic sheen of the frame. The design uses aggressive red accents against a matte black body. The composition is clean and focused on engineering excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc_OAklfLw3pDLUKjRnD-VksjEL5Y907fDdEOMrfhQQlk2aVB5NroSK1qkU4y6Um4ElOsxc3wxz1hQ9z6yPpVsLAQBHokqWdemc_ApfkHiD6gIbnY2fW0RjZ5bG5sR5CxVonIXjy5n48Wcy0LYqz2t25QgpdXwhNKFZ5bYq0WGLWILd0fHJaaTE8_8uMU60sawVXQU9h8Iwjj36YkTbLH8ZHlhrwrY_qNxka6XwDzP42wnzUiSERJOqVaQ27iot1yryfht8BXNdRM"/>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-background to-transparent">
+<h4 class="font-headline-md text-headline-md text-on-surface">NOMAD 450-R</h4>
+<p class="font-label-caps text-label-caps text-primary mt-1">KSH 850,000</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[280px] md:min-w-[360px] snap-start group border border-secondary/15 relative">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Close up shot of a motorcycle headlight and front fork, showing intricate mechanical detailing. The polished silver and chrome surfaces reflect a sophisticated dark studio setup. Vibrant red brake lines and logos provide a sharp color contrast. The lighting is precise, highlighting the industrial precision and build quality of the machine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASIeIWnXmuzpxSwl94VsI-INW97ZBdFWAv7W962nkO6V5gICilJaI3H4OHwnYlqUVeS4VXHgGKSc9BASGpbhdPwc8TN0h3LiiQI-UkuhAfuAWmKqCBfocQbghmaxKeSHv8h-uvsCsM4UvevTfgdrwptlyjQrdMrbjkj33pOrVgslKvygUt4FVYYBYEQaSSO1CpPeJ4ycBTYlZieauI8Aecf_gF8XbgMRffGshpZSMfdTEoRuuUP4ryA95P_x-tsVtHsNn5ZEGKCcw"/>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-background to-transparent">
+<h4 class="font-headline-md text-headline-md text-on-surface">PULSE EV-1</h4>
+<p class="font-label-caps text-label-caps text-primary mt-1">KSH 980,000</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Nakaja Section (Bento Grid) -->
+<section class="mt-section-gap-mobile px-margin-mobile max-w-container-max mx-auto">
+<div class="mb-12 text-center">
+<h3 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight">THE NAKAJA STANDARD</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto mt-2">Engineered for endurance. Serviced for excellence.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Bento Item 1: Large Image -->
+<div class="md:col-span-2 relative group overflow-hidden border border-secondary/15 h-64 md:h-96">
+<img class="w-full h-full object-cover" data-alt="A technician in a dark, clean workshop working on a motorcycle engine with specialized tools. The scene is illuminated by focused work lights that highlight the mechanical complexity of the drivetrain. The workshop has a premium industrial feel with metallic tool chests and organized parts. The mood is one of expert precision and high-end service quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3CS3MEpIa-pEWXVCD6NWWh6kVNz3HJVesFpXjZLJ0dgl0CDqv28xXSpr3f5R9tVGXFR3OkGNOS9Sggnmpr4e3vQsaoZQZNWiSIT-uxmKtz1rCW76iIOmFP2C7JGw2uWEAMhnmT2cvInzdVgjFKwW4ayFsDvgSyZIBOKFxoZ1YNWCOzhcaQCRrtiR_YLbAMD4g_PLAE9N5Bkp9LSKq70zQbB9YazrW8SMajYzkLXCMokevCgBnOs2nF_TQZHZvJ_cSJeqdWv8iTt8"/>
+<div class="absolute inset-0 bg-black/60 p-8 flex flex-col justify-end backdrop-blur-[2px]">
+<h4 class="font-headline-md text-headline-md text-primary">PREMIUM SERVICE</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Our master technicians ensure every bike is tuned for peak performance on Kenya's most demanding roads.</p>
+</div>
+</div>
+<!-- Bento Item 2: Icon/Value -->
+<div class="bg-surface-container-low border border-secondary/15 p-8 flex flex-col justify-center gap-4 text-center">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="shield">shield</span>
+<h4 class="font-headline-md text-headline-md text-on-surface uppercase">RUGGED DURABILITY</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Reinforced chassis and weather-sealed electronics built to withstand any environment.</p>
+</div>
+<!-- Bento Item 3: Icon/Value -->
+<div class="bg-surface-container-low border border-secondary/15 p-8 flex flex-col justify-center gap-4 text-center">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h4 class="font-headline-md text-headline-md text-on-surface uppercase">GENUINE PARTS</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">We stock 100% original components to maintain your bike's mechanical integrity.</p>
+</div>
+<!-- Bento Item 4: Wide Text -->
+<div class="md:col-span-2 bg-primary-container p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="text-left">
+<h4 class="font-headline-md text-headline-md text-on-primary-container">READY TO RIDE?</h4>
+<p class="font-body-md text-body-md text-on-primary-container/80">Book a test drive at any of our dealer locations nationwide.</p>
+</div>
+<button class="bg-on-primary-container text-primary-container font-cta-label text-cta-label px-8 py-4 uppercase whitespace-nowrap active:scale-95 transition-transform">
+                        Find a Dealer
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface-container-low/90 backdrop-blur-2xl border-t border-secondary/15 shadow-[0_-2px_10px_0_rgba(0,0,0,0.5)] fixed bottom-0 w-full z-50 rounded-t-xl flex justify-around items-center h-20 pb-safe px-2">
+<a class="flex flex-col items-center justify-center text-primary fill-primary active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="motorcycle" style="font-variation-settings: 'FILL' 1;">motorcycle</span>
+<span class="font-label-caps text-label-caps mt-1">Showroom</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary/60 hover:text-primary-fixed-dim transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-caps text-label-caps mt-1">Bikes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary/60 hover:text-primary-fixed-dim transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="handyman">handyman</span>
+<span class="font-label-caps text-label-caps mt-1">Service</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary/60 hover:text-primary-fixed-dim transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-label-caps text-label-caps mt-1">Parts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary/60 hover:text-primary-fixed-dim transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-label-caps text-label-caps mt-1">Inquiry</span>
+</a>
+</nav>
+<!-- WhatsApp FAB -->
+<a class="fixed bottom-24 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl active:scale-90 transition-transform flex items-center justify-center border-2 border-white/20" href="#">
+<svg class="w-7 h-7 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+</svg>
+</a>
+</body></html>

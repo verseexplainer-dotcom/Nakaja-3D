@@ -1,0 +1,2 @@
+-- Snapshot entrypoint for the Nakaja schema.
+-- Apply migrations in `supabase/migrations/` as the source of truth.

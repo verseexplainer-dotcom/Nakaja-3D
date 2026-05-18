@@ -1,0 +1,1 @@
+export const trackEvent = (name: string, detail: Record<string, unknown> = {}) => { if (typeof window === 'undefined') return; window.dispatchEvent(new CustomEvent('nakaja:track', { detail: { name, ...detail } })); };

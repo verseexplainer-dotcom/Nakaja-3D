@@ -1,0 +1,11 @@
+{
+  "project": "nakaja-3d",
+  "docs": [
+    ".mcp/context7.md",
+    ".mcp/playwright.md",
+    ".mcp/cloudflare.md",
+    ".mcp/supabase.md",
+    ".mcp/github.md",
+    ".mcp/cloudinary.md"
+  ]
+}
