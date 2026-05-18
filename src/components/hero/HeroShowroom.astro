@@ -1,7 +1,172 @@
 ---
-// @ts-nocheck
-import RawComponent from '../HeroShowroom.astro';
-const Component = RawComponent as any;
-const props = Astro.props;
+import { Image } from 'astro:assets';
+import slide1 from '../../assets/Hero slides/bike aerial view.png';
+import slide2 from '../../assets/Hero slides/bike low angle side view.png';
+import slide3 from '../../assets/Hero slides/bike low angle view.png';
+import slide4 from '../../assets/Hero slides/bike side top view.png';
+import slide5 from '../../assets/Hero slides/bike side view.png';
+import slide6 from '../../assets/Hero slides/close angle 45.png';
+
+interface HeroAction {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'secondary' | 'whatsapp';
+  external?: boolean;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle: string;
+  actions?: HeroAction[];
+}
+
+const {
+  eyebrow = 'Authorized UM Motorbikes Dealer · Nairobi',
+  title,
+  subtitle,
+  actions = [
+    { label: 'Explore Models', href: '/motorcycles', variant: 'primary' },
+  ],
+} = Astro.props;
+
+const slides = [slide1, slide2, slide3, slide4, slide5, slide6];
+const actionClass = (variant: HeroAction['variant']) => {
+  if (variant === 'whatsapp') return 'btn-primary bg-[#25D366] hover:bg-[#1EBE5A] hover:border-transparent text-white';
+  if (variant === 'secondary') return 'btn-secondary';
+  return 'btn-primary';
+};
 ---
-<Component {...props} />
+<section class="relative w-full h-[90vh] min-h-[640px] flex items-center justify-center overflow-hidden border-b border-metal/20">
+  <div class="absolute inset-0 z-0 bg-surface">
+    <div id="hero-slider" class="w-full h-full relative" aria-hidden="true" data-slider-ready="false">
+      {slides.map((slide, index) => (
+        <div class={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-50 mix-blend-luminosity' : 'opacity-0'} slide-item`}>
+          <Image src={slide} alt="" class="w-full h-full object-cover object-center" loading={index === 0 ? 'eager' : 'lazy'} sizes="100vw" />
+        </div>
+      ))}
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-background/95 via-background/55 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent"></div>
+  </div>
+
+  <div class="relative z-10 w-full px-6 max-w-[1280px] mx-auto mt-8 md:mt-14 flex justify-start">
+    <div class="max-w-[840px] text-left hero-reveal">
+      <p class="font-mono text-xs uppercase tracking-[0.34em] text-primary-container mb-5 animate-fade-in-up">{eyebrow}</p>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white mb-6 uppercase tracking-tighter leading-[0.92] animate-fade-in-up delay-100">
+        {title}
+      </h1>
+      <p class="text-lg md:text-2xl font-body text-on-surface-variant mb-10 max-w-[660px] leading-relaxed animate-fade-in-up delay-200">
+        {subtitle}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in-up delay-300">
+        {actions.map((action) => (
+          <a
+            href={action.href}
+            target={action.external ? '_blank' : undefined}
+            rel={action.external ? 'noopener noreferrer' : undefined}
+            class={actionClass(action.variant)}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+
+      <div class="flex gap-3 mt-12 animate-fade-in-up delay-400" aria-label="Hero image controls">
+        {slides.map((_, index) => (
+          <button
+            type="button"
+            class={`w-12 h-1 transition-all duration-300 slide-indicator ${index === 0 ? 'bg-primary-container' : 'bg-white/30 hover:bg-white/50'}`}
+            data-index={index}
+            aria-label={`Show motorcycle image ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupSlider() {
+    const slider = document.querySelector<HTMLElement>('#hero-slider');
+    if (!slider || slider.dataset.sliderReady === 'true') return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const slides = slider.querySelectorAll<HTMLElement>('.slide-item');
+    const indicators = document.querySelectorAll<HTMLButtonElement>('.slide-indicator');
+    if (!slides.length || !indicators.length) return;
+
+    slider.dataset.sliderReady = 'true';
+    let currentSlide = 0;
+    let slideInterval: number | undefined;
+
+    const goToSlide = (index: number) => {
+      slides[currentSlide]?.classList.remove('opacity-50', 'mix-blend-luminosity');
+      slides[currentSlide]?.classList.add('opacity-0');
+      indicators[currentSlide]?.classList.remove('bg-primary-container');
+      indicators[currentSlide]?.classList.add('bg-white/30');
+
+      currentSlide = index;
+
+      slides[currentSlide]?.classList.remove('opacity-0');
+      slides[currentSlide]?.classList.add('opacity-50', 'mix-blend-luminosity');
+      indicators[currentSlide]?.classList.remove('bg-white/30', 'hover:bg-white/50');
+      indicators[currentSlide]?.classList.add('bg-primary-container');
+    };
+
+    const nextSlide = () => {
+      goToSlide((currentSlide + 1) % slides.length);
+    };
+
+    const startSlider = () => {
+      if (reduceMotion) return;
+      slideInterval = window.setInterval(nextSlide, 5000);
+    };
+
+    const resetSlider = () => {
+      if (slideInterval) window.clearInterval(slideInterval);
+      startSlider();
+    };
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        goToSlide(index);
+        resetSlider();
+      }, { once: false });
+    });
+
+    startSlider();
+  }
+
+  setupSlider();
+  document.addEventListener('astro:page-load', setupSlider);
+</script>
+
+<style>
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

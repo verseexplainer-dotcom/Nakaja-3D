@@ -3,7 +3,20 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 const dir = 'src/content/products';
 const files = readdirSync(dir).filter((name) => name.endsWith('.md'));
-const required = ['title:', 'summary:', 'status:', 'lastVerifiedAt:'];
+const required = [
+  'title:',
+  'excerpt:',
+  'cashPrice:',
+  'deposit:',
+  'watuPlan:',
+  'fortunePlan:',
+  'engine:',
+  'power:',
+  'torque:',
+  'maxLoad:',
+  'warranty:',
+  'whatsappText:',
+];
 const failures = [];
 for (const file of files) {
   const body = readFileSync(join(dir, file), 'utf8');

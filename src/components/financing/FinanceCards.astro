@@ -1,7 +1,64 @@
 ---
-// @ts-nocheck
-import RawComponent from '../FinanceCards.astro';
-const Component = RawComponent as any;
-const props = Astro.props;
+interface Props {
+  cashPrice: number;
+  deposit: number;
+  watuPlan: string;
+  fortunePlan: string;
+}
+
+const { cashPrice, deposit, watuPlan, fortunePlan } = Astro.props;
 ---
-<Component {...props} />
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="card p-6 border-t-2 border-t-primary-container">
+    <h3 class="font-display text-xl text-white uppercase mb-2">Cash Purchase</h3>
+    <p class="font-mono text-3xl font-bold text-white mb-6">KSh {cashPrice.toLocaleString()}</p>
+    <ul class="space-y-3 font-mono text-sm text-secondary mb-8">
+      <li class="flex items-center gap-2">
+        <span class="text-primary-container">✓</span> Direct Purchase Route
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="text-primary-container">✓</span> Ownership Documents Confirmed At Sale
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="text-primary-container">✓</span> Warranty Details Confirmed At Sale
+      </li>
+    </ul>
+  </div>
+  
+  <div class="card p-6 border-t-2 border-t-[#F0B90B]">
+    <h3 class="font-display text-xl text-white uppercase mb-2">Watu Credit</h3>
+    <p class="font-mono text-sm text-secondary mb-1">Deposit: KSh {deposit.toLocaleString()}</p>
+    <p class="font-mono text-xl font-bold text-[#F0B90B] mb-6">{watuPlan}</p>
+    <ul class="space-y-3 font-mono text-sm text-secondary mb-8">
+      <li class="flex items-center gap-2">
+        <span class="text-[#F0B90B]">✓</span> Partner Terms Apply
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="text-[#F0B90B]">✓</span> Requirements Confirmed By Partner
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="text-[#F0B90B]">✓</span> Current Offer Confirmed By Nakaja
+      </li>
+    </ul>
+  </div>
+
+  <div class="card p-6 border-t-2 border-t-[#00A859]">
+    <h3 class="font-display text-xl text-white uppercase mb-2">Fortune</h3>
+    <p class="font-mono text-sm text-secondary mb-1">Deposit: KSh {deposit.toLocaleString()}</p>
+    <p class="font-mono text-xl font-bold text-[#00A859] mb-6">{fortunePlan}</p>
+    <ul class="space-y-3 font-mono text-sm text-secondary mb-8">
+      <li class="flex items-center gap-2">
+        <span class="text-[#00A859]">✓</span> Partner Terms Apply
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="text-[#00A859]">✓</span> Daily Rate Options Where Listed
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="text-[#00A859]">✓</span> Current Offer Confirmed By Nakaja
+      </li>
+    </ul>
+  </div>
+</div>
+<p class="text-secondary font-mono text-xs mt-4">
+  Rates and approval are subject to financing partner terms. Confirm current offer with Nakaja Bikes.
+</p>

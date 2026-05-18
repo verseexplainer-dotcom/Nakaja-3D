@@ -108,4 +108,4 @@ They care about deposit, repayment, durability, support, location, and fast cont
 
 - Treat `ai/` as the canonical agent workspace.
 - Use the numbered prompts under `ai/prompts/` instead of the older legacy prompt names.
-- Archived legacy guidance lives under `ai/archive/` and `docs/archive/`.
+- Active project guidance now lives only under `ai/` and `docs/`.
