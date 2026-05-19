@@ -1,5 +1,6 @@
 ---
 import dealer from '../../data/dealer.json';
+import nakajaLogo from '../../assets/site_logo/nakaja-logo.png';
 import { mainNavigation } from '../../data/navigation/main';
 import { buildWhatsAppUrl, publicMessengerLink } from '../../lib/contact';
 
@@ -16,7 +17,7 @@ const navLinkClass = (href: string) =>
 <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-metal/20" data-site-header>
   <div class="max-w-[1280px] mx-auto px-4 md:px-6 h-20 flex items-center justify-between gap-4">
     <a href="/" class="flex items-center gap-3 shrink-0" aria-label={`${dealer.dealer} home`}>
-      <img src="/logo_nakaja.png" alt="Nakaja Bikes logo" class="h-11 w-11 md:h-12 md:w-12 object-contain" width="48" height="48" />
+      <img src={nakajaLogo.src} alt="Nakaja Bikes logo" class="h-14 w-14 md:h-16 md:w-16 object-contain" width={nakajaLogo.width} height={nakajaLogo.height} decoding="async" />
       <span class="text-lg md:text-2xl font-display font-bold text-white tracking-tight uppercase">
         {dealer.dealer.split(' ')[0]}<span class="text-primary-container">{dealer.dealer.split(' ')[1] || ''}</span>
       </span>

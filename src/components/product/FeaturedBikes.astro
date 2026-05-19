@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
 import { buildWhatsAppUrl } from '../../lib/contact';
 
 interface Props {
@@ -28,11 +27,14 @@ const whatsappUrl = (text: string) => buildWhatsAppUrl(text);
       <article class="relative min-h-[620px] overflow-hidden border border-metal/20 bg-surface-container group">
         <div class="absolute inset-0 opacity-70">
           {primary.data.heroImage ? (
-            <Image
-              src={primary.data.heroImage}
+            <img
+              src={primary.data.heroImage.src}
               alt={primary.data.title}
               class="w-full h-full object-contain object-center p-8 md:p-12 transition-transform duration-700 group-hover:scale-105"
+              width={primary.data.heroImage.width}
+              height={primary.data.heroImage.height}
               loading="lazy"
+              decoding="async"
             />
           ) : (
             <div class="w-full h-full flex items-center justify-center text-secondary font-mono text-sm">Image Coming Soon</div>
@@ -81,11 +83,14 @@ const whatsappUrl = (text: string) => buildWhatsAppUrl(text);
           <article class="grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr] min-h-[294px] overflow-hidden border border-metal/20 bg-black/30 group">
             <div class="relative min-h-[210px] sm:min-h-0 bg-surface-container">
               {product.data.heroImage ? (
-                <Image
-                  src={product.data.heroImage}
+                <img
+                  src={product.data.heroImage.src}
                   alt={product.data.title}
                   class="absolute inset-0 w-full h-full object-contain p-5 transition-transform duration-700 group-hover:scale-110"
+                  width={product.data.heroImage.width}
+                  height={product.data.heroImage.height}
                   loading="lazy"
+                  decoding="async"
                 />
               ) : (
                 <div class="absolute inset-0 flex items-center justify-center text-secondary font-mono text-xs">Image Coming Soon</div>

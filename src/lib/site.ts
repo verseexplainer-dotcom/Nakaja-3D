@@ -1,10 +1,12 @@
+import nakajaLogo from '../assets/site_logo/nakaja-logo.png';
+
 const DEFAULT_SITE_URL = 'https://nakajabikes.co.ke';
 
 const normalizeBaseUrl = (value: string) => value.replace(/\/$/, '');
 
 export const siteUrl = normalizeBaseUrl(import.meta.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL);
 export const siteOrigin = new URL(siteUrl).origin;
-export const defaultOgImagePath = '/logo_nakaja.png';
+export const defaultOgImagePath = nakajaLogo.src;
 
 export const buildAbsoluteUrl = (path = '/') => new URL(path, `${siteOrigin}/`).toString();
 
