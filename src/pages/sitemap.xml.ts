@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { buildAbsoluteUrl } from '../lib/site';
 
-const staticRoutes = ['/', '/motorcycles/', '/financing/', '/contact/'];
+const staticRoutes = ['/', '/motorcycles/', '/financing/', '/contact/', '/privacy/', '/terms/', '/data-deletion/'];
 
 export const GET: APIRoute = async () => {
   const products = await getCollection('products');

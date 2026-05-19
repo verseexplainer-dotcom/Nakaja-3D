@@ -65,7 +65,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
       <slot />
     </main>
     <footer class="border-t border-metal/20 mt-24 py-12 bg-[#0e0e0e]">
-      <div class="max-w-[1280px] mx-auto px-6 grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr_1fr] gap-8">
+      <div class="max-w-[1280px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr] gap-8">
         <div>
           <a href="/" class="inline-flex items-center gap-3 mb-4" aria-label={`${dealer.dealer} home`}>
             <img src="/logo_nakaja.png" alt="Nakaja Bikes logo" class="h-12 w-12 object-contain" width="48" height="48" loading="lazy" />
@@ -80,6 +80,14 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
             <li><a href="/motorcycles" class="hover:text-primary-container transition-colors">Motorcycles</a></li>
             <li><a href="/financing" class="hover:text-primary-container transition-colors">Financing Plans</a></li>
             <li><a href="/contact" class="hover:text-primary-container transition-colors">Contact Us</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Legal links">
+          <h2 class="font-mono text-sm uppercase text-secondary mb-4">Legal</h2>
+          <ul class="space-y-2">
+            <li><a href="/privacy" class="hover:text-primary-container transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms" class="hover:text-primary-container transition-colors">Terms of Use</a></li>
+            <li><a href="/data-deletion" class="hover:text-primary-container transition-colors">Data Deletion</a></li>
           </ul>
         </nav>
         <section aria-labelledby="footer-showroom-heading">

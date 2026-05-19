@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import dealer from '../data/dealer.json';
+
+const updatedDate = 'May 19, 2026';
+---
+<Layout
+  title="Data Deletion Instructions | Nakaja Bikes"
+  description="Data deletion instructions for Nakaja Bikes website leads, WhatsApp conversations, Messenger conversations, and Meta app data."
+  canonicalPath="/data-deletion/"
+>
+  <section class="max-w-[1040px] mx-auto px-6 py-20 md:py-28">
+    <p class="font-mono text-xs uppercase tracking-[0.3em] text-primary-container mb-4">Data Deletion</p>
+    <h1 class="text-4xl md:text-6xl font-display font-black text-white uppercase mb-6">Request Deletion Of Your Data</h1>
+    <p class="text-secondary text-lg leading-relaxed max-w-3xl">Use this page if you want Nakaja Bikes to delete website inquiry records, callback requests, or Meta-related Messenger and WhatsApp conversation records that we control.</p>
+    <p class="font-mono text-xs uppercase tracking-widest text-secondary mt-6">Last updated: {updatedDate}</p>
+  </section>
+
+  <section class="max-w-[1040px] mx-auto px-6 pb-24">
+    <div class="grid grid-cols-1 lg:grid-cols-[0.35fr_1fr] gap-10 border-t border-metal/20 pt-10">
+      <aside class="text-secondary font-mono text-xs uppercase tracking-widest">
+        Website Leads<br />
+        Messenger<br />
+        WhatsApp
+      </aside>
+
+      <div class="space-y-10 text-secondary leading-relaxed">
+        <section aria-labelledby="deletion-request-heading">
+          <h2 id="deletion-request-heading" class="text-2xl font-display font-bold text-white uppercase mb-4">How To Send A Request</h2>
+          <p>Email <a href={`mailto:${dealer.email}?subject=Data%20deletion%20request`} class="text-white underline decoration-primary-container underline-offset-4 hover:text-primary">{dealer.email}</a> with the subject <strong class="text-white">Data deletion request</strong>, or contact Nakaja on {dealer.phoneDisplay}.</p>
+          <p class="mt-4">Include the name, phone number, email address, Messenger profile, WhatsApp number, or channel you used so we can find the right record. Do not send sensitive documents unless we ask for verification.</p>
+        </section>
+
+        <section aria-labelledby="deletion-process-heading">
+          <h2 id="deletion-process-heading" class="text-2xl font-display font-bold text-white uppercase mb-4">What Happens Next</h2>
+          <ol class="space-y-3 list-decimal pl-5">
+            <li>We confirm your request and may verify that you own the contact details connected to the record.</li>
+            <li>We search website leads, callback requests, and Meta chat records controlled by Nakaja Bikes.</li>
+            <li>We delete or anonymize matching records unless we need to keep limited information for legal, security, fraud prevention, accounting, or dispute reasons.</li>
+            <li>We send confirmation once the request has been handled.</li>
+          </ol>
+        </section>
+
+        <section aria-labelledby="deletion-meta-heading">
+          <h2 id="deletion-meta-heading" class="text-2xl font-display font-bold text-white uppercase mb-4">Messenger And WhatsApp Data</h2>
+          <p>Nakaja can delete records stored in systems we control. Meta, WhatsApp, Messenger, mobile networks, and your own device may keep separate copies under their own policies. To remove data from those platforms, use the privacy or deletion tools inside the relevant app.</p>
+        </section>
+
+        <section aria-labelledby="deletion-timeline-heading">
+          <h2 id="deletion-timeline-heading" class="text-2xl font-display font-bold text-white uppercase mb-4">Response Time</h2>
+          <p>We aim to acknowledge deletion requests promptly and complete valid requests within 30 days where possible. Complex requests or verification issues may take longer.</p>
+        </section>
+
+        <section aria-labelledby="deletion-contact-heading">
+          <h2 id="deletion-contact-heading" class="text-2xl font-display font-bold text-white uppercase mb-4">Contact Details</h2>
+          <p>{dealer.dealer}<br />{dealer.location}<br />{dealer.phoneDisplay}<br /><a href={`mailto:${dealer.email}`} class="text-white underline decoration-primary-container underline-offset-4 hover:text-primary">{dealer.email}</a></p>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>
