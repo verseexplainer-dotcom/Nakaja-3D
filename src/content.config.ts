@@ -10,6 +10,7 @@ const products = defineCollection({
     excerpt: z.string(),
     cashPrice: z.number(),
     deposit: z.number(),
+    watuDeposit: z.number().optional(),
     watuPlan: z.string(),
     fortunePlan: z.string(),
     engine: z.string(),

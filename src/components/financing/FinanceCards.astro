@@ -2,11 +2,13 @@
 interface Props {
   cashPrice: number;
   deposit: number;
+  watuDeposit?: number;
   watuPlan: string;
   fortunePlan: string;
 }
 
-const { cashPrice, deposit, watuPlan, fortunePlan } = Astro.props;
+const { cashPrice, deposit, watuDeposit, watuPlan, fortunePlan } = Astro.props;
+const effectiveWatuDeposit = watuDeposit ?? deposit;
 ---
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
   <div class="card p-6 border-t-2 border-t-primary-container">
@@ -27,7 +29,7 @@ const { cashPrice, deposit, watuPlan, fortunePlan } = Astro.props;
   
   <div class="card p-6 border-t-2 border-t-[#F0B90B]">
     <h3 class="font-display text-xl text-white uppercase mb-2">Watu Credit</h3>
-    <p class="font-mono text-sm text-secondary mb-1">Deposit: KSh {deposit.toLocaleString()}</p>
+    <p class="font-mono text-sm text-secondary mb-1">Downpayment: KSh {effectiveWatuDeposit.toLocaleString()}</p>
     <p class="font-mono text-xl font-bold text-[#F0B90B] mb-6">{watuPlan}</p>
     <ul class="space-y-3 font-mono text-sm text-secondary mb-8">
       <li class="flex items-center gap-2">

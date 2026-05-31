@@ -3,7 +3,8 @@ title: "UM Duty Max XL 125cc"
 excerpt: "Affordable commercial bike focused on day-to-day work, fuel-conscious riding, and practical ownership for Nairobi routes."
 cashPrice: 155000
 deposit: 30000
-watuPlan: "18 Months @ 2,557/week"
+watuDeposit: 55000
+watuPlan: "18 Months @ 2,557/week · 365/day · 8.75% interest"
 fortunePlan: "18 Months @ 442/day"
 engine: "125cc Single Cylinder 4-Stroke"
 power: "7.5kW @ 8000rpm"

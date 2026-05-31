@@ -7,18 +7,51 @@ interface Props {
 }
 
 const { images = [], title } = Astro.props;
+const [heroImage, ...detailImages] = images;
 ---
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-  {images.length > 0 ? images.map((img, index) => (
-    <figure class:list={[
-      'card overflow-hidden bg-surface-container',
-      index === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/3]',
-    ]}>
-      <img src={img.src} alt={`${title} view ${index + 1}`} class="w-full h-full object-contain p-4 md:p-6 hover:scale-105 transition-transform duration-700 motion-reduce:transform-none" width={img.width} height={img.height} loading="lazy" decoding="async" />
+{heroImage ? (
+  <div class="w-full">
+    <figure class="relative overflow-hidden border-y border-metal/20 bg-[radial-gradient(circle_at_50%_58%,rgba(227,24,55,0.16),transparent_30%),linear-gradient(180deg,#201f1f,#090909)] min-h-[58vh] md:min-h-[76vh] flex items-center justify-center">
+      <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-metal/60 to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.58))]"></div>
+      <img
+        src={heroImage.src}
+        alt={`${title} main showroom view`}
+        class="relative z-10 w-full h-full max-h-[82vh] object-contain px-4 py-8 md:px-12 md:py-14 transition-transform duration-700 hover:scale-[1.025] motion-reduce:transform-none"
+        width={heroImage.width}
+        height={heroImage.height}
+        loading="eager"
+        decoding="async"
+      />
+      <figcaption class="absolute left-6 bottom-6 z-20 bg-black/70 border border-metal/20 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-secondary md:left-10">
+        Main product view
+      </figcaption>
     </figure>
-  )) : (
-    <div class="card overflow-hidden bg-surface-container aspect-[4/3] flex items-center justify-center col-span-full">
+
+    {detailImages.length > 0 && (
+      <div class="mt-6 overflow-x-auto overscroll-x-contain scroll-smooth snap-x snap-mandatory px-6 md:px-10 pb-3 [scrollbar-width:thin] [scrollbar-color:#c0c0c0_#201f1f]">
+        <div class="flex gap-4 min-w-max">
+          {detailImages.map((img, index) => (
+            <figure class="snap-center shrink-0 w-[78vw] sm:w-[52vw] lg:w-[34vw] xl:w-[28vw] aspect-[4/3] overflow-hidden border border-metal/20 bg-surface-container">
+              <img
+                src={img.src}
+                alt={`${title} detail view ${index + 2}`}
+                class="w-full h-full object-contain p-4 md:p-6 hover:scale-105 transition-transform duration-700 motion-reduce:transform-none"
+                width={img.width}
+                height={img.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+) : (
+  <div class="px-6 md:px-10">
+    <div class="card overflow-hidden bg-surface-container aspect-[4/3] flex items-center justify-center">
       <p class="text-secondary font-mono text-sm">No images available</p>
     </div>
-  )}
-</div>
+  </div>
+)}

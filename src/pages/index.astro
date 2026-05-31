@@ -91,13 +91,13 @@ const financingWhatsappUrl = buildWhatsAppUrl(financingMessage);
             <div class="border border-metal/20 bg-black/30 p-5">
               <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">{xl125?.data.title}</span>
               <strong class="block text-white font-display text-2xl mb-1">KSh {xl125?.data.cashPrice.toLocaleString()}</strong>
-              <span class="block text-secondary font-mono text-sm">Downpayment KSh {xl125?.data.deposit.toLocaleString()}</span>
+              <span class="block text-secondary font-mono text-sm">Downpayment KSh {(xl125?.data.watuDeposit ?? xl125?.data.deposit)?.toLocaleString()}</span>
               <span class="block text-[#F0B90B] font-mono text-sm mt-2">{xl125?.data.watuPlan}</span>
             </div>
             <div class="border border-metal/20 bg-black/30 p-5">
               <span class="block font-mono text-[10px] uppercase tracking-widest text-secondary mb-2">{ndume?.data.title}</span>
               <strong class="block text-white font-display text-2xl mb-1">KSh {ndume?.data.cashPrice.toLocaleString()}</strong>
-              <span class="block text-secondary font-mono text-sm">Downpayment KSh {ndume?.data.deposit.toLocaleString()}</span>
+              <span class="block text-secondary font-mono text-sm">Downpayment KSh {(ndume?.data.watuDeposit ?? ndume?.data.deposit)?.toLocaleString()}</span>
               <span class="block text-[#F0B90B] font-mono text-sm mt-2">{ndume?.data.watuPlan}</span>
             </div>
           </div>

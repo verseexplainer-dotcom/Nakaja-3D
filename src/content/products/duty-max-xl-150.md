@@ -3,7 +3,8 @@ title: "UM Duty Max XL 150cc \"Ndume\""
 excerpt: "Heavy-duty commuter bike with double shock suspension and a work-focused 150cc setup for riders who need a stronger daily machine."
 cashPrice: 165000
 deposit: 30000
-watuPlan: "18 Months @ 2,736/week"
+watuDeposit: 58000
+watuPlan: "18 Months @ 2,736/week · 391/day · 8.75% interest"
 fortunePlan: "18 Months @ 470/day"
 engine: "149.4cc 4-Stroke Single Cylinder OHV"
 power: "8.3kW @ 8500rpm"
