@@ -14,7 +14,7 @@
     "perf:check": "node scripts/check-performance.mjs",
     "preview": "astro preview",
     "cf:dev": "wrangler pages dev dist --compatibility-date=2026-05-15",
-    "cf:deploy": "wrangler pages deploy dist",
+    "cf:deploy": "wrangler pages deploy dist/client --project-name nakaja-bikes",
     "supabase:start": "supabase start",
     "supabase:stop": "supabase stop",
     "astro": "astro"
