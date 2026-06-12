@@ -41,3 +41,16 @@ Thumbs.db
 # temporary files
 *.tmp
 *.temp
+
+# Graphify
+graphify-out/
+.graphify_uncached.txt
+
+# Analysis artifacts
+all_assets.txt
+all_chunked_files.txt
+all_files_repo.txt
+chunks_0_5.txt
+
+# Temporary/Sensitive JSON
+public/favicons/authorize.json
