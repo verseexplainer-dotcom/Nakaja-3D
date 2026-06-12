@@ -7,6 +7,8 @@ interface Props {
   fortunePlan: string;
 }
 
+import { currentFinancingOffer } from '../../data/financing/partners';
+
 const { cashPrice, deposit, watuDeposit, watuPlan, fortunePlan } = Astro.props;
 const effectiveWatuDeposit = watuDeposit ?? deposit;
 ---
@@ -39,7 +41,7 @@ const effectiveWatuDeposit = watuDeposit ?? deposit;
         <span class="text-[#F0B90B]">✓</span> Requirements Confirmed By Partner
       </li>
       <li class="flex items-center gap-2">
-        <span class="text-[#F0B90B]">✓</span> Current Offer Confirmed By Nakaja
+        <span class="text-[#F0B90B]">✓</span> Offer Runs Until {currentFinancingOffer.validUntil}
       </li>
     </ul>
   </div>
@@ -56,11 +58,11 @@ const effectiveWatuDeposit = watuDeposit ?? deposit;
         <span class="text-[#00A859]">✓</span> Daily Rate Options Where Listed
       </li>
       <li class="flex items-center gap-2">
-        <span class="text-[#00A859]">✓</span> Current Offer Confirmed By Nakaja
+        <span class="text-[#00A859]">✓</span> Offer Runs Until {currentFinancingOffer.validUntil}
       </li>
     </ul>
   </div>
 </div>
 <p class="text-secondary font-mono text-xs mt-4">
-  Rates and approval are subject to financing partner terms. Confirm current offer with Nakaja Bikes.
+  {currentFinancingOffer.disclaimer}
 </p>

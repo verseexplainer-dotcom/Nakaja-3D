@@ -5,6 +5,7 @@ import HeroShowroom from '../components/hero/HeroShowroom.astro';
 import ProductCard from '../components/product/ProductCard.astro';
 import MessengerCTA from '../components/common/MessengerCTA.astro';
 import dealer from '../data/dealer.json';
+import { currentFinancingOffer } from '../data/financing/partners';
 import { buildWhatsAppUrl } from '../lib/contact';
 
 const allProducts = await getCollection('products');
@@ -75,7 +76,7 @@ const financingWhatsappUrl = buildWhatsAppUrl(financingMessage);
       <div class="max-w-3xl mb-10">
         <p class="font-mono text-xs uppercase tracking-[0.28em] text-primary-container mb-4">Financing Preview</p>
         <h2 class="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight mb-4">Choose the route that fits your daily cashflow</h2>
-        <p class="text-secondary font-body">Compare Watu and Fortune examples, then confirm the current offer directly with Nakaja Bikes.</p>
+        <p class="text-secondary font-body">Compare Watu and Fortune examples, then confirm the offer running until {currentFinancingOffer.validUntil} directly with Nakaja Bikes.</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -124,7 +125,7 @@ const financingWhatsappUrl = buildWhatsAppUrl(financingMessage);
           <a href={financingWhatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary">Confirm Current Offer</a>
         </article>
       </div>
-      <p class="text-secondary font-mono text-xs mt-6">Rates and approval are subject to financing partner terms. Confirm current offer with Nakaja Bikes.</p>
+      <p class="text-secondary font-mono text-xs mt-6">{currentFinancingOffer.disclaimer}</p>
     </div>
   </section>
 

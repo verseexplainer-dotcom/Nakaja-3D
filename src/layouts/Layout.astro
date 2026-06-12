@@ -4,6 +4,7 @@ import Header from '../components/layout/Header.astro';
 import StickyWhatsAppCTA from '../components/common/StickyWhatsAppCTA.astro';
 import nakajaLogo from '../assets/site_logo/nakaja-logo.png';
 import dealer from '../data/dealer.json';
+import { currentFinancingOffer } from '../data/financing/partners';
 import { buildAbsoluteUrl, buildCanonicalPath, defaultOgImagePath } from '../lib/site';
 
 interface Props {
@@ -73,7 +74,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
             <h2 class="text-xl font-display font-bold uppercase">{dealer.dealer}</h2>
           </a>
           <p class="text-secondary max-w-sm">Authorized UM Motorbikes dealer in Nairobi. {dealer.slogans.primary}.</p>
-          <p class="text-secondary font-mono text-xs mt-6 max-w-xl">Rates and approval are subject to financing partner terms. Confirm current offer with Nakaja Bikes.</p>
+          <p class="text-secondary font-mono text-xs mt-6 max-w-xl">{currentFinancingOffer.disclaimer}</p>
         </div>
         <nav aria-label="Footer quick links">
           <h2 class="font-mono text-sm uppercase text-secondary mb-4">Quick Links</h2>

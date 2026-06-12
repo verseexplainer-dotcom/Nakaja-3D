@@ -7,6 +7,8 @@ interface Props {
   compact?: boolean;
 }
 
+import { currentFinancingOffer } from '../../data/financing/partners';
+
 const {
   title = 'Need Financing Support?',
   subtitle = 'Compare deposit, daily, and weekly options, then request a callback from Nakaja Bikes.',
@@ -20,6 +22,6 @@ const {
   <p class="text-secondary font-body mb-6">{subtitle}</p>
   <a href={ctaHref} class="btn-primary">{ctaText}</a>
   <p class="text-secondary font-mono text-xs mt-6">
-    Rates and approval are subject to financing partner terms. Confirm current offer with Nakaja Bikes.
+    {currentFinancingOffer.disclaimer}
   </p>
 </section>

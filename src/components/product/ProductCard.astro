@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { currentFinancingOffer } from '../../data/financing/partners';
 import { buildWhatsAppUrl } from '../../lib/contact';
 
 interface Props {
@@ -46,7 +47,7 @@ const whatsappUrl = buildWhatsAppUrl(whatsappText);
       </div>
     </div>
 
-    <p class="text-secondary font-mono text-[11px] mb-6">Rates and approval are subject to financing partner terms. Confirm current offer with Nakaja Bikes.</p>
+    <p class="text-secondary font-mono text-[11px] mb-6">{currentFinancingOffer.disclaimer}</p>
 
     <div class="mt-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
       <a href={`/motorcycles/${productSlug}`} class="btn-secondary text-xs px-4 py-4 font-bold uppercase tracking-widest">View Details</a>
